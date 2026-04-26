@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: lx-portal
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/lx_portal
+    username: lx_portal
+    password: lh
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+  h2:
+    console:
+      enabled: false
+
+server:
+  port: 8080
+
+app:
+  base-url: http://127.0.0.1:8080
+  admin:
+    username: admin
+    password: admin123
+  upload:
+    dir: uploads
+  notification:
+    webhook-url: ${LX_PORTAL_WEBHOOK_URL:}
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"

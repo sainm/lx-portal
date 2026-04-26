@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:fragment="page(title, content)">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" th:content="${metaDescription ?: '提供个体、家庭、亲密关系与职场压力心理咨询预约服务，重视隐私、伦理与专业陪伴。'}">
+  <meta name="keywords" th:content="${metaKeywords ?: '心理咨询,预约咨询,情绪压力,亲密关系,亲子沟通'}">
+  <title th:text="${title} ?: '安心心理咨询'">安心心理咨询</title>
+  <link rel="stylesheet" th:href="@{/css/site.css}" href="/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="主导航">
+      <a class="brand" th:href="@{/}" href="/">
+        <span class="brand-mark">安</span>
+        <span>
+          <strong th:text="${siteName ?: '安心心理'}">安心心理</strong>
+          <small>专业心理咨询预约</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="展开导航">☰</button>
+      <div class="nav-links" data-nav-links>
+        <a th:href="@{/}" href="/">首页</a>
+        <a th:href="@{/services}" href="/services">服务项目</a>
+        <a th:href="@{/counselors}" href="/counselors">咨询师</a>
+        <a th:href="@{/process}" href="/process">咨询流程</a>
+        <a th:href="@{/faq}" href="/faq">FAQ</a>
+        <a class="button button-small" th:href="@{/appointment}" href="/appointment">预约咨询</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" th:replace="${content}">
+    <section class="section">
+      <p>页面内容</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <strong th:text="${siteName ?: '安心心理'}">安心心理</strong>
+        <p>提供清晰、克制、尊重边界的心理咨询预约服务。</p>
+      </div>
+      <div>
+        <span class="footer-label">联系方式</span>
+        <p th:text="${contactPhone ?: '400-000-0000'}">400-000-0000</p>
+        <p th:text="${businessHours ?: '周一至周日 09:00-21:00'}">周一至周日 09:00-21:00</p>
+      </div>
+      <div>
+        <span class="footer-label">合规说明</span>
+        <a th:href="@{/privacy}" href="/privacy">隐私政策</a>
+        <a th:href="@{/notice}" href="/notice">咨询须知</a>
+      </div>
+    </div>
+    <p class="footer-note">心理咨询不等同于医疗诊断或急救服务。如有立即危险，请联系当地急救服务。</p>
+  </footer>
+
+  <div class="cookie-banner" data-cookie-banner>
+    <p>我们可能使用必要 Cookie 与统计工具改善网站体验。继续浏览表示你了解相关说明。</p>
+    <button class="button button-small" type="button" data-cookie-close>知道了</button>
+  </div>
+  <script th:src="@{/js/site.js}" src="/js/site.js"></script>
+</body>
+</html>

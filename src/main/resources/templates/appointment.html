@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/public :: page('预约心理咨询', ~{::main})}">
+<main>
+  <section class="page-title">
+    <p class="eyebrow">预约咨询</p>
+    <h1>留下基本信息，我们会尽快与你确认</h1>
+    <p>表单仅用于预约沟通与咨询师匹配。请避免填写过度隐私细节，详细情况可在正式咨询中展开。</p>
+  </section>
+
+  <section class="form-section">
+    <aside class="crisis-card">
+      <h2>紧急情况提示</h2>
+      <p>如你或身边的人正处于自伤、自杀、伤人等立即危险中，请马上联系当地急救电话、警方或可信赖的身边人。本站预约不提供急救服务。</p>
+    </aside>
+    <form class="appointment-form" th:action="@{/api/public/appointments}" action="/api/public/appointments" method="post" data-appointment-form>
+      <div class="field-grid">
+        <label>称呼
+          <input name="nickname" type="text" autocomplete="name" required placeholder="例如：李女士">
+        </label>
+        <label>手机或微信
+          <input name="contact" type="text" autocomplete="tel" required placeholder="便于工作人员联系">
+        </label>
+        <label>所在城市
+          <input name="city" type="text" required placeholder="例如：上海">
+        </label>
+        <label>年龄段
+          <select name="ageRange" required>
+            <option value="">请选择</option>
+            <option>18 岁以下</option>
+            <option>18-25 岁</option>
+            <option>26-35 岁</option>
+            <option>36-45 岁</option>
+            <option>46 岁以上</option>
+          </select>
+        </label>
+        <label>咨询对象
+          <select name="consultationTarget" required>
+            <option value="">请选择</option>
+            <option>本人</option>
+            <option>伴侣</option>
+            <option>孩子</option>
+            <option>家庭</option>
+            <option>员工</option>
+          </select>
+        </label>
+        <label>困扰方向
+          <select name="concernDirection" required>
+            <option value="">请选择</option>
+            <option>情绪</option>
+            <option>压力</option>
+            <option>睡眠</option>
+            <option>亲密关系</option>
+            <option>亲子</option>
+            <option>学业</option>
+            <option>职场</option>
+            <option>自我成长</option>
+          </select>
+        </label>
+        <label>咨询方式
+          <select name="consultationMethod" required>
+            <option value="">请选择</option>
+            <option>线上</option>
+            <option>线下</option>
+            <option>都可以</option>
+          </select>
+        </label>
+        <label>偏好时间
+          <select name="preferredTime" required>
+            <option value="">请选择</option>
+            <option>工作日白天</option>
+            <option>工作日晚上</option>
+            <option>周末</option>
+            <option>均可协商</option>
+          </select>
+        </label>
+      </div>
+
+      <label>指定咨询师
+        <select name="preferredCounselorId">
+          <option value="">没有指定</option>
+          <option th:each="counselor : ${counselors}" th:value="${counselor.id}" th:text="${counselor.name}">咨询师</option>
+        </select>
+      </label>
+      <fieldset>
+        <legend>是否接受推荐咨询师</legend>
+        <label class="choice"><input name="acceptsRecommendation" type="radio" value="true" required> 接受推荐</label>
+        <label class="choice"><input name="acceptsRecommendation" type="radio" value="false"> 暂不接受</label>
+      </fieldset>
+      <label>问题简述
+        <textarea name="problemSummary" rows="5" maxlength="800" placeholder="可简单描述目前困扰、持续时间和希望获得的帮助"></textarea>
+      </label>
+      <label class="check-line">
+        <input name="privacyAgreed" type="checkbox" required>
+        <span>我已阅读并同意<a href="/privacy" th:href="@{/privacy}">隐私政策</a>。</span>
+      </label>
+      <label class="check-line">
+        <input name="emergencyAcknowledged" type="checkbox" required>
+        <span>我理解心理咨询不等同于医疗诊断、治疗或急救服务。</span>
+      </label>
+      <div class="form-actions">
+        <button class="button" type="submit">提交预约</button>
+        <p data-form-message aria-live="polite"></p>
+      </div>
+    </form>
+  </section>
+  <script th:src="@{/js/appointment.js}" src="/js/appointment.js"></script>
+</main>
+</html>

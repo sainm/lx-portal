@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/public :: page('心理科普文章', ~{::main})}">
+<main>
+  <section class="page-title">
+    <p class="eyebrow">内容中心</p>
+    <h1>心理科普文章</h1>
+    <p>用温和、清晰的内容帮助来访者理解咨询和自己的困扰。</p>
+  </section>
+  <section class="section">
+    <div class="topic-grid">
+      <article th:each="article : ${articles}">
+        <h3 th:text="${article.title}">文章标题</h3>
+        <p th:text="${article.summary}">文章摘要</p>
+        <a class="text-link" th:href="@{/articles/{slug}(slug=${article.slug})}">阅读</a>
+      </article>
+    </div>
+  </section>
+</main>
+</html>

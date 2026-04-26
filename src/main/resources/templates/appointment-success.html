@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/public :: page('预约已提交', ~{::main})}">
+<main>
+  <section class="success-section">
+    <div class="success-mark">✓</div>
+    <p class="eyebrow">提交成功</p>
+    <h1>预约信息已收到</h1>
+    <p>工作人员会在营业时间内尽快与你联系，确认咨询方式、时间和适合的咨询师。请保持手机或微信可联系。</p>
+    <div class="next-steps">
+      <article><strong>1. 等待联系</strong><span>通常会先核对基本需求与可预约时间。</span></article>
+      <article><strong>2. 确认安排</strong><span>根据你的议题和偏好确认咨询师与咨询方式。</span></article>
+      <article><strong>3. 开始咨询</strong><span>按约定时间进行线上或线下咨询。</span></article>
+    </div>
+    <div class="alert-box">
+      <strong>紧急情况请勿等待预约回复</strong>
+      <p>如出现自伤、自杀、伤人或其他立即危险，请立即联系当地急救电话、警方或身边可信赖的人。</p>
+    </div>
+    <div class="action-row center">
+      <a class="button" th:href="@{/}" href="/">返回首页</a>
+      <a class="button button-secondary" th:href="@{/faq}" href="/faq">查看常见问题</a>
+    </div>
+  </section>
+</main>
+</html>

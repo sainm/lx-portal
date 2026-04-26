@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/admin :: adminPage('运营总览', ~{::main})}">
+<main>
+  <section class="metric-grid">
+    <article><span>待联系</span><strong th:text="${pendingCount ?: 12}">12</strong></article>
+    <article><span>今日新增</span><strong th:text="${todayCount ?: 3}">3</strong></article>
+    <article><span>已预约</span><strong th:text="${bookedCount ?: 28}">28</strong></article>
+    <article><span>本周完成</span><strong th:text="${completedCount ?: 9}">9</strong></article>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <p>预约管理</p>
+        <h1>最新预约线索</h1>
+      </div>
+      <a class="primary-link" th:href="@{/admin/appointments}" href="/admin/appointments">查看全部</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>称呼</th>
+            <th>方向</th>
+            <th>咨询方式</th>
+            <th>偏好时间</th>
+            <th>状态</th>
+            <th>创建时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>李女士</td>
+            <td>情绪压力</td>
+            <td>线上</td>
+            <td>工作日晚上</td>
+            <td><span class="status pending">待联系</span></td>
+            <td>2026-04-26 10:20</td>
+          </tr>
+          <tr>
+            <td>王先生</td>
+            <td>亲密关系</td>
+            <td>都可以</td>
+            <td>周末</td>
+            <td><span class="status contacted">已联系</span></td>
+            <td>2026-04-26 09:15</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</html>

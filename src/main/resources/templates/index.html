@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/public :: page('安心心理咨询预约 - 首页', ~{::main})}">
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">专业、保密、低压力的心理支持</p>
+      <h1>在需要被理解的时候，找到合适的咨询支持</h1>
+      <p class="hero-text">安心心理为情绪压力、亲密关系、亲子沟通、职场困扰与自我成长提供预约咨询服务。我们会先了解你的情况，再协助匹配合适的咨询师。</p>
+      <div class="action-row">
+        <a class="button" th:href="@{/appointment}" href="/appointment">预约首次咨询</a>
+        <a class="button button-secondary" th:href="@{/counselors}" href="/counselors">查看咨询师</a>
+      </div>
+    </div>
+    <div class="hero-panel" aria-label="服务承诺">
+      <div class="hero-card">
+        <span>01</span>
+        <strong>隐私优先</strong>
+        <p>预约信息仅用于咨询匹配与联系确认。</p>
+      </div>
+      <div class="hero-card">
+        <span>02</span>
+        <strong>人工确认</strong>
+        <p>提交后由工作人员联系确认时间与方式。</p>
+      </div>
+      <div class="hero-card">
+        <span>03</span>
+        <strong>边界清晰</strong>
+        <p>心理咨询不替代医疗诊断或急救服务。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">常见场景</p>
+      <h2>这些时刻可以考虑寻求支持</h2>
+    </div>
+    <div class="topic-grid">
+      <article><h3>情绪与压力</h3><p>焦虑、低落、紧绷、睡眠受影响，或长期处于消耗状态。</p></article>
+      <article><h3>关系与家庭</h3><p>亲密关系冲突、亲子沟通困难、家庭边界与照顾压力。</p></article>
+      <article><h3>学习与职场</h3><p>学业压力、职业倦怠、人际困扰、重要选择前的摇摆。</p></article>
+      <article><h3>自我成长</h3><p>想更理解自己，梳理长期模式，建立更稳定的生活节奏。</p></article>
+    </div>
+  </section>
+
+  <section class="section muted-section">
+    <div class="section-heading">
+      <p class="eyebrow">服务项目</p>
+      <h2>按你的议题选择咨询方向</h2>
+    </div>
+    <div class="service-list">
+      <article><span>个体咨询</span><h3>情绪压力与自我成长</h3><p>适合希望探索个人困扰、关系模式和生活压力的来访者。</p><a href="/appointment" th:href="@{/appointment}">预约</a></article>
+      <article><span>伴侣/婚姻咨询</span><h3>亲密关系与沟通</h3><p>协助双方看见互动循环，练习更清晰的表达和倾听。</p><a href="/appointment" th:href="@{/appointment}">预约</a></article>
+      <article><span>亲子/家庭咨询</span><h3>家庭支持与青少年陪伴</h3><p>围绕亲子沟通、学业压力和家庭协作提供支持。</p><a href="/appointment" th:href="@{/appointment}">预约</a></article>
+    </div>
+  </section>
+
+  <section class="section split-section">
+    <div>
+      <p class="eyebrow">咨询流程</p>
+      <h2>从预约到开始咨询，每一步都清楚</h2>
+      <ol class="steps">
+        <li><strong>提交预约</strong><span>填写基本情况与偏好时间。</span></li>
+        <li><strong>联系确认</strong><span>工作人员确认咨询方式、时间与需求。</span></li>
+        <li><strong>匹配咨询师</strong><span>按议题、方式和时间匹配或确认指定咨询师。</span></li>
+        <li><strong>开始咨询</strong><span>在约定时间进行线上或线下咨询。</span></li>
+      </ol>
+    </div>
+    <aside class="trust-box">
+      <h3>保密与例外</h3>
+      <p>咨询过程遵循保密原则。涉及明确自伤、伤人或法律规定情形时，咨询师可能需要采取必要保护措施。</p>
+      <a class="text-link" href="/notice" th:href="@{/notice}">查看咨询须知</a>
+    </aside>
+  </section>
+</main>
+</html>

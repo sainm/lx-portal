@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/admin :: adminPage('预约列表', ~{::main})}">
+<main>
+  <script>
+    window.AdminPageConfig = {
+      resource: "appointments",
+      title: "预约列表",
+      description: "查看最新预约，并记录联系状态与内部备注。",
+      endpoint: "/api/admin/appointments",
+      rowId: "id",
+      columns: [
+        { key: "nickname", label: "称呼" },
+        { key: "contact", label: "联系方式" },
+        { key: "city", label: "城市" },
+        { key: "concernDirection", label: "咨询方向" },
+        { key: "consultationMethod", label: "咨询方式" },
+        { key: "preferredTime", label: "偏好时间" },
+        { key: "status", label: "状态", type: "status" },
+        { key: "createdAt", label: "提交时间", type: "datetime" }
+      ],
+      formTitle: "处理预约",
+      submitText: "保存处理记录",
+      createLabel: "",
+      formFields: [
+        { key: "nickname", label: "称呼", type: "readonly" },
+        { key: "contact", label: "联系方式", type: "readonly" },
+        { key: "status", label: "状态", type: "select", options: ["PENDING_CONTACT", "CONTACTED", "SCHEDULED", "COMPLETED", "CANCELED"] },
+        { key: "internalNote", label: "内部备注", type: "textarea", span: 2 }
+      ]
+    };
+  </script>
+
+  <section class="panel admin-resource" data-admin-resource>
+    <div class="panel-header">
+      <div>
+        <p>预约管理</p>
+        <h1>预约列表</h1>
+      </div>
+      <button class="ghost-button" type="button" data-admin-refresh>刷新</button>
+    </div>
+
+    <div class="admin-alert" data-admin-message hidden></div>
+    <div class="table-wrap">
+      <table>
+        <thead data-admin-table-head></thead>
+        <tbody data-admin-table-body>
+          <tr><td>正在加载...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel admin-editor" data-admin-editor hidden>
+    <div class="panel-header">
+      <div>
+        <p>预约处理</p>
+        <h1 data-admin-form-title>处理预约</h1>
+      </div>
+      <button class="ghost-button" type="button" data-admin-cancel>取消</button>
+    </div>
+    <form class="admin-form" data-admin-form></form>
+  </section>
+</main>
+</html>

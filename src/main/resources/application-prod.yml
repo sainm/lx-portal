@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${LX_PORTAL_DB_URL}
+    username: ${LX_PORTAL_DB_USERNAME}
+    password: ${LX_PORTAL_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  h2:
+    console:
+      enabled: false
+
+server:
+  forward-headers-strategy: framework
+
+app:
+  base-url: ${LX_PORTAL_BASE_URL}

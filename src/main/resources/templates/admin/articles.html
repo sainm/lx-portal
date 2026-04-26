@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/admin :: adminPage('文章管理', ~{::main})}">
+<main>
+  <script>
+    window.AdminPageConfig = {
+      resource: "articles",
+      title: "文章管理",
+      description: "维护文章草稿、封面、摘要与发布状态。",
+      endpoint: "/api/admin/articles",
+      rowId: "id",
+      createLabel: "新增文章",
+      formTitle: "文章内容",
+      columns: [
+        { key: "title", label: "标题" },
+        { key: "slug", label: "Slug" },
+        { key: "summary", label: "摘要" },
+        { key: "status", label: "状态", type: "status" },
+        { key: "publishedAt", label: "发布时间", type: "datetime" },
+        { key: "updatedAt", label: "更新时间", type: "datetime" }
+      ],
+      formFields: [
+        { key: "title", label: "标题", required: true },
+        { key: "slug", label: "Slug", required: true },
+        { key: "coverUrl", label: "封面 URL", span: 2 },
+        { key: "summary", label: "摘要", type: "textarea", span: 2 },
+        { key: "content", label: "正文", type: "textarea", span: 2, large: true },
+        { key: "status", label: "状态", type: "select", options: ["DRAFT", "PUBLISHED", "ARCHIVED"] },
+        { key: "publishedAt", label: "发布时间", type: "datetime-local" },
+        { key: "seoTitle", label: "SEO 标题" },
+        { key: "seoKeywords", label: "SEO 关键词" },
+        { key: "seoDescription", label: "SEO 描述", type: "textarea", span: 2 }
+      ]
+    };
+  </script>
+
+  <section class="panel admin-resource" data-admin-resource>
+    <div class="panel-header">
+      <div>
+        <p>内容运营</p>
+        <h1>文章管理</h1>
+      </div>
+      <div class="admin-actions">
+        <button class="ghost-button" type="button" data-admin-refresh>刷新</button>
+        <button class="primary-button" type="button" data-admin-create>新增文章</button>
+      </div>
+    </div>
+    <div class="admin-alert" data-admin-message hidden></div>
+    <div class="table-wrap">
+      <table>
+        <thead data-admin-table-head></thead>
+        <tbody data-admin-table-body>
+          <tr><td>正在加载...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel admin-editor" data-admin-editor hidden>
+    <div class="panel-header">
+      <div>
+        <p>文章编辑</p>
+        <h1 data-admin-form-title>文章内容</h1>
+      </div>
+      <button class="ghost-button" type="button" data-admin-cancel>取消</button>
+    </div>
+    <form class="admin-form" data-admin-form></form>
+  </section>
+</main>
+</html>

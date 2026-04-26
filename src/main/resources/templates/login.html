@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/public :: page('后台登录', ~{::main})}">
+<main>
+  <section class="page-title">
+    <p class="eyebrow">后台管理</p>
+    <h1>登录运营后台</h1>
+    <p>仅限授权运营人员使用。</p>
+  </section>
+  <section class="form-section">
+    <form class="appointment-form" th:action="@{/login}" method="post">
+      <label>账号
+        <input name="username" type="text" autocomplete="username" required>
+      </label>
+      <label>密码
+        <input name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <div class="form-actions">
+        <button class="button" type="submit">登录</button>
+      </div>
+    </form>
+  </section>
+</main>
+</html>
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:fragment="adminPage(title, content)">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title th:text="${title} ?: '后台管理'">后台管理</title>
+  <link rel="stylesheet" th:href="@{/css/admin.css}" href="/css/admin.css">
+</head>
+<body class="admin-shell">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" th:href="@{/admin}" href="/admin">
+      <span>安</span>
+      <strong>安心心理后台</strong>
+    </a>
+    <nav class="admin-menu" aria-label="后台导航">
+      <a class="active" th:href="@{/admin/appointments}" href="/admin/appointments">预约管理</a>
+      <a th:href="@{/admin/counselors}" href="/admin/counselors">咨询师管理</a>
+      <a th:href="@{/admin/services}" href="/admin/services">服务项目</a>
+      <a th:href="@{/admin/articles}" href="/admin/articles">文章内容</a>
+      <a th:href="@{/admin/site-config}" href="/admin/site-config">基础配置</a>
+    </nav>
+  </aside>
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <button class="icon-button" type="button" data-admin-menu aria-label="展开菜单">☰</button>
+      <div>
+        <strong th:text="${title} ?: '后台管理'">后台管理</strong>
+        <span>请谨慎处理预约敏感信息</span>
+      </div>
+      <form th:action="@{/admin/logout}" action="/admin/logout" method="post">
+        <button class="ghost-button" type="submit">退出</button>
+      </form>
+    </header>
+    <main class="admin-content" th:replace="${content}">
+      <section class="panel">后台内容</section>
+    </main>
+  </div>
+  <script th:src="@{/js/admin.js}" src="/js/admin.js"></script>
+</body>
+</html>

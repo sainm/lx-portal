@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/admin :: adminPage('咨询师管理', ~{::main})}">
+<main>
+  <script>
+    window.AdminPageConfig = {
+      resource: "counselors",
+      title: "咨询师管理",
+      description: "维护咨询师资料、排序与发布状态。",
+      endpoint: "/api/admin/counselors",
+      rowId: "id",
+      createLabel: "新增咨询师",
+      formTitle: "咨询师资料",
+      columns: [
+        { key: "name", label: "姓名" },
+        { key: "specialties", label: "擅长方向" },
+        { key: "counselingMethods", label: "咨询方式" },
+        { key: "priceAndDuration", label: "价格/时长" },
+        { key: "sortOrder", label: "排序" },
+        { key: "status", label: "状态", type: "status" },
+        { key: "updatedAt", label: "更新时间", type: "datetime" }
+      ],
+      formFields: [
+        { key: "name", label: "姓名", required: true },
+        { key: "avatarUrl", label: "头像 URL" },
+        { key: "summary", label: "简介", type: "textarea", span: 2 },
+        { key: "specialties", label: "擅长方向" },
+        { key: "serviceAudience", label: "服务人群" },
+        { key: "counselingMethods", label: "咨询方式" },
+        { key: "counselingStyle", label: "咨询风格" },
+        { key: "priceAndDuration", label: "价格与时长" },
+        { key: "sortOrder", label: "排序", type: "number" },
+        { key: "status", label: "状态", type: "select", options: ["DRAFT", "PUBLISHED", "ARCHIVED"] },
+        { key: "qualifications", label: "资质说明", type: "textarea", span: 2 }
+      ]
+    };
+  </script>
+
+  <section class="panel admin-resource" data-admin-resource>
+    <div class="panel-header">
+      <div>
+        <p>人员内容</p>
+        <h1>咨询师管理</h1>
+      </div>
+      <div class="admin-actions">
+        <button class="ghost-button" type="button" data-admin-refresh>刷新</button>
+        <button class="primary-button" type="button" data-admin-create>新增咨询师</button>
+      </div>
+    </div>
+    <div class="admin-alert" data-admin-message hidden></div>
+    <div class="table-wrap">
+      <table>
+        <thead data-admin-table-head></thead>
+        <tbody data-admin-table-body>
+          <tr><td>正在加载...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel admin-editor" data-admin-editor hidden>
+    <div class="panel-header">
+      <div>
+        <p>资料编辑</p>
+        <h1 data-admin-form-title>咨询师资料</h1>
+      </div>
+      <button class="ghost-button" type="button" data-admin-cancel>取消</button>
+    </div>
+    <form class="admin-form" data-admin-form></form>
+  </section>
+</main>
+</html>
