@@ -29,6 +29,9 @@ import com.lx.portal.appointment.AppointmentRepository;
 import com.lx.portal.appointment.AppointmentStatus;
 import com.lx.portal.article.ArticleRepository;
 import com.lx.portal.article.ArticleCategoryRepository;
+import com.lx.portal.chat.ChatMessageRepository;
+import com.lx.portal.chat.ChatSessionDto;
+import com.lx.portal.chat.ChatSessionRepository;
 import com.lx.portal.counselor.CounselorRepository;
 import com.lx.portal.serviceitem.ServiceItemRepository;
 import com.lx.portal.siteconfig.SiteConfigService;
@@ -47,12 +50,15 @@ public class AdminApiController {
     private final UploadService uploadService;
     private final OperationLogService operationLogService;
     private final AnalyticsEventRepository analyticsEventRepository;
+    private final ChatSessionRepository chatSessionRepository;
+    private final ChatMessageRepository chatMessageRepository;
 
     public AdminApiController(AppointmentRepository appointmentRepository, AppointmentService appointmentService,
             CounselorRepository counselorRepository, ServiceItemRepository serviceItemRepository,
             ArticleRepository articleRepository, ArticleCategoryRepository articleCategoryRepository,
             SiteConfigService siteConfigService, UploadService uploadService,
-            OperationLogService operationLogService, AnalyticsEventRepository analyticsEventRepository) {
+            OperationLogService operationLogService, AnalyticsEventRepository analyticsEventRepository,
+            ChatSessionRepository chatSessionRepository, ChatMessageRepository chatMessageRepository) {
         this.appointmentRepository = appointmentRepository;
         this.appointmentService = appointmentService;
         this.counselorRepository = counselorRepository;
@@ -63,6 +69,8 @@ public class AdminApiController {
         this.uploadService = uploadService;
         this.operationLogService = operationLogService;
         this.analyticsEventRepository = analyticsEventRepository;
+        this.chatSessionRepository = chatSessionRepository;
+        this.chatMessageRepository = chatMessageRepository;
     }
 
     @GetMapping("/appointments")
@@ -111,6 +119,21 @@ public class AdminApiController {
                 "appointmentSubmit", appointmentSubmit,
                 "submitPerFormOpen", appointmentFormOpen == 0 ? 0 : (double) appointmentSubmit / appointmentFormOpen,
                 "submitPerHomeView", homeView == 0 ? 0 : (double) appointmentSubmit / homeView));
+    }
+
+    @GetMapping("/chat/sessions")
+    public ApiResponse<?> chatSessions(@RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "50") int pageSize) {
+        var pageable = PageRequest.of(Math.max(page - 1, 0), Math.min(pageSize, 100));
+        return ApiResponse.ok(PageResponse.from(chatSessionRepository.findAll(pageable)
+                .map(session -> ChatSessionDto.from(session,
+                        chatMessageRepository.findBySessionIdOrderByCreatedAtAsc(session.getId())))));
+    }
+
+    @GetMapping("/chat/sessions/{id}")
+    public ApiResponse<?> chatSession(@PathVariable Long id) {
+        var session = chatSessionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("聊天会话不存在"));
+        return ApiResponse.ok(ChatSessionDto.from(session, chatMessageRepository.findBySessionIdOrderByCreatedAtAsc(id)));
     }
 
     @GetMapping(value = "/appointments/export", produces = "text/csv;charset=UTF-8")

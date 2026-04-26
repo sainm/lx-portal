@@ -206,4 +206,9 @@ public class WebController {
     public String adminArticles() {
         return "admin/articles";
     }
+
+    @GetMapping("/admin/chats")
+    public String adminChats() {
+        return "admin/chats";
+    }
 }

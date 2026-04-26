@@ -61,6 +61,35 @@
     <p>我们可能使用必要 Cookie 与统计工具改善网站体验。继续浏览表示你了解相关说明。</p>
     <button class="button button-small" type="button" data-cookie-close>知道了</button>
   </div>
+  <div class="chat-widget" data-chat-widget>
+    <button class="chat-toggle" type="button" data-chat-toggle aria-label="打开咨询预约助手">咨询</button>
+    <section class="chat-panel" data-chat-panel aria-label="咨询预约助手">
+      <header>
+        <div>
+          <strong>预约助手</strong>
+          <span>非诊断，非急救服务</span>
+        </div>
+        <button type="button" data-chat-close aria-label="关闭">×</button>
+      </header>
+      <div class="chat-messages" data-chat-messages></div>
+      <div class="chat-profile">
+        <input name="visitorName" data-chat-name type="text" placeholder="称呼">
+        <input name="visitorContact" data-chat-contact type="text" placeholder="手机/微信">
+        <select data-chat-topic>
+          <option value="">咨询方向</option>
+          <option>情绪压力</option>
+          <option>亲密关系</option>
+          <option>亲子家庭</option>
+          <option>职场压力</option>
+          <option>自我成长</option>
+        </select>
+      </div>
+      <form class="chat-form" data-chat-form>
+        <input data-chat-input type="text" maxlength="500" placeholder="输入你的问题或预约需求">
+        <button class="button button-small" type="submit">发送</button>
+      </form>
+    </section>
+  </div>
   <script th:src="@{/js/site.js}" src="/js/site.js"></script>
 </body>
 </html>

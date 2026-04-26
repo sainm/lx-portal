@@ -339,6 +339,32 @@ th {
   padding-top: .3rem;
 }
 
+.admin-detail {
+  margin-top: 1rem;
+}
+
+.admin-chat-messages {
+  display: grid;
+  gap: .75rem;
+}
+
+.admin-chat-message {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: .75rem;
+  background: #fff;
+}
+
+.admin-chat-message.visitor {
+  border-color: #b7ded1;
+  background: #f2faf6;
+}
+
+.admin-chat-message p {
+  margin: .35rem 0 0;
+  color: var(--subtle);
+}
+
 @media (max-width: 900px) {
   .admin-shell {
     grid-template-columns: 1fr;

@@ -9,6 +9,82 @@
 })();
 
 (function () {
+  if (!window.ChatAdminPage) {
+    return;
+  }
+  var body = document.querySelector("[data-admin-table-body]");
+  var detail = document.querySelector("[data-admin-detail]");
+  var messages = document.querySelector("[data-admin-chat-messages]");
+  var refresh = document.querySelector("[data-refresh]");
+  if (!body) {
+    return;
+  }
+
+  function text(value) {
+    return value === null || value === undefined || value === "" ? "-" : String(value);
+  }
+
+  function request(url) {
+    return fetch(url, { credentials: "same-origin", headers: { Accept: "application/json" } })
+      .then(function (response) {
+        return response.json().then(function (payload) {
+          if (!response.ok || payload.code !== 0) {
+            throw new Error(payload.message || "请求失败");
+          }
+          return payload.data;
+        });
+      });
+  }
+
+  function renderRows(items) {
+    if (!items.length) {
+      body.innerHTML = '<tr><td colspan="8" class="empty-cell">暂无聊天会话</td></tr>';
+      return;
+    }
+    body.innerHTML = items.map(function (item) {
+      return "<tr data-chat-id=\"" + item.id + "\">"
+        + "<td>" + item.id + "</td>"
+        + "<td>" + text(item.visitorName) + "</td>"
+        + "<td>" + text(item.visitorContact) + "</td>"
+        + "<td>" + text(item.topic) + "</td>"
+        + "<td>" + text(item.status) + "</td>"
+        + "<td>" + (item.crisisFlagged ? "是" : "否") + "</td>"
+        + "<td>" + (item.aiEnabled ? "已启用" : "预留") + "</td>"
+        + "<td>" + text(item.updatedAt).replace("T", " ").slice(0, 16) + "</td>"
+        + "</tr>";
+    }).join("");
+  }
+
+  function load() {
+    body.innerHTML = '<tr><td colspan="8" class="empty-cell">正在加载...</td></tr>';
+    request("/api/admin/chat/sessions").then(function (data) {
+      renderRows(data.items || []);
+    }).catch(function (error) {
+      body.innerHTML = '<tr><td colspan="8" class="empty-cell">' + error.message + "</td></tr>";
+    });
+  }
+
+  body.addEventListener("click", function (event) {
+    var row = event.target.closest("[data-chat-id]");
+    if (!row || !detail || !messages) {
+      return;
+    }
+    request("/api/admin/chat/sessions/" + row.getAttribute("data-chat-id")).then(function (session) {
+      detail.hidden = false;
+      messages.innerHTML = (session.messages || []).map(function (message) {
+        return '<div class="admin-chat-message ' + String(message.role).toLowerCase() + '">'
+          + '<strong>' + message.role + '</strong><p>' + text(message.content) + '</p></div>';
+      }).join("");
+    });
+  });
+
+  if (refresh) {
+    refresh.addEventListener("click", load);
+  }
+  load();
+})();
+
+(function () {
   var config = window.AdminPageConfig;
   var root = document.querySelector("[data-admin-resource]");
   if (!config || !root) {

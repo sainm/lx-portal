@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN" th:replace="~{layouts/admin :: adminPage('聊天会话', ~{::main})}">
+<main>
+  <script>
+    window.ChatAdminPage = true;
+  </script>
+  <section class="panel" data-admin-resource="chats">
+    <header class="panel-header">
+      <div>
+        <p>在线预约助手</p>
+        <h1>聊天会话</h1>
+      </div>
+      <button class="ghost-button" type="button" data-refresh>刷新</button>
+    </header>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>称呼</th>
+            <th>联系方式</th>
+            <th>方向</th>
+            <th>状态</th>
+            <th>危机</th>
+            <th>AI</th>
+            <th>更新时间</th>
+          </tr>
+        </thead>
+        <tbody data-admin-table-body></tbody>
+      </table>
+    </div>
+    <section class="panel admin-detail" data-admin-detail hidden>
+      <h2>会话消息</h2>
+      <div class="admin-chat-messages" data-admin-chat-messages></div>
+    </section>
+  </section>
+</main>
+</html>

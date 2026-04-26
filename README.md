@@ -30,6 +30,7 @@
 - 隐私政策
 - 咨询须知
 - Cookie / 统计提示
+- 右下角网页聊天/预约助手
 
 ### 后台管理
 
@@ -45,6 +46,7 @@
 - 文件上传接口
 - 操作日志
 - 访问统计与转化统计
+- 聊天会话查看
 
 ### 安全与合规
 
@@ -55,6 +57,15 @@
 - 预约列表默认不展示完整问题简述
 - 预约详情页展示完整问题简述
 - 文件上传限制类型和大小
+- 网页聊天明确非诊断、非治疗、非急救服务边界
+- 危机关键词触发紧急求助提示
+
+### AI 预留
+
+- 已预留 `AiChatProvider` 接口
+- 当前默认实现为 `NoopAiChatProvider`
+- 后续可接入 OpenAI 或其他模型服务
+- 集成说明见 [AI 聊天集成文档](doc/ai-chat-integration.md)
 
 ## 本地数据库
 
@@ -87,6 +98,7 @@ create database lx_portal owner lx_portal;
 - 预约页：http://127.0.0.1:8080/appointment
 - 后台登录：http://127.0.0.1:8080/login
 - 后台首页：http://127.0.0.1:8080/admin/dashboard
+- 后台聊天：http://127.0.0.1:8080/admin/chats
 
 后台初始账号：
 
@@ -118,10 +130,10 @@ src/test                               测试代码
 - [任务清单](doc/task.md)
 - [技术架构](doc/technical-architecture.md)
 - [本地开发说明](doc/development-setup.md)
+- [AI 聊天集成文档](doc/ai-chat-integration.md)
 
 ## 说明
 
 当前版本是 MVP 骨架，重点完成门户展示、预约线索收集、后台基础管理和统计闭环。
 
 暂未纳入 MVP 的功能包括：在线支付、用户中心、心理测评、视频咨询、复杂排班、自动匹配咨询师、企业后台和小程序同步。
-

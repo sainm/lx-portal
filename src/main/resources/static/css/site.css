@@ -304,6 +304,126 @@ textarea { resize: vertical; }
 .cookie-banner.show { display: flex; }
 .cookie-banner p { margin: 0; color: var(--subtle); }
 
+.chat-widget {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 30;
+}
+
+.chat-toggle {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.chat-panel {
+  position: absolute;
+  right: 0;
+  bottom: 72px;
+  display: none;
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(680px, calc(100vh - 120px));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.chat-panel.open {
+  display: grid;
+  grid-template-rows: auto minmax(180px, 1fr) auto auto;
+}
+
+.chat-panel header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .9rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background: #eef4f0;
+}
+
+.chat-panel header span {
+  display: block;
+  color: var(--subtle);
+  font-size: .82rem;
+}
+
+.chat-panel header button {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.chat-messages {
+  display: grid;
+  align-content: start;
+  gap: .6rem;
+  padding: .9rem;
+  overflow-y: auto;
+}
+
+.chat-message {
+  max-width: 86%;
+  padding: .65rem .75rem;
+  border-radius: 8px;
+  background: var(--muted);
+  color: var(--ink);
+  font-size: .92rem;
+}
+
+.chat-message.visitor {
+  justify-self: end;
+  background: var(--accent);
+  color: #fff;
+}
+
+.chat-message.crisis {
+  border: 1px solid #e4c9b8;
+  background: #fff8f3;
+  color: var(--warn);
+}
+
+.chat-profile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  padding: .75rem;
+  border-top: 1px solid var(--line);
+}
+
+.chat-profile select {
+  grid-column: 1 / -1;
+}
+
+.chat-profile input,
+.chat-profile select,
+.chat-form input {
+  min-height: 38px;
+  font-size: .9rem;
+}
+
+.chat-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .5rem;
+  padding: .75rem;
+  border-top: 1px solid var(--line);
+}
+
 @media (max-width: 860px) {
   .nav-toggle {
     display: inline-flex;
@@ -335,4 +455,5 @@ textarea { resize: vertical; }
   .cookie-banner { align-items: stretch; flex-direction: column; }
   .hero h1, .page-title h1, .success-section h1 { font-size: 2.4rem; }
   .section-heading h2, .split-section h2 { font-size: 1.8rem; }
+  .chat-widget { right: 14px; bottom: 14px; }
 }
